@@ -75,7 +75,7 @@ python scripts/4_color_masks.py
 This script:
 - Takes the simplified masks from the previous step
 - Creates colored versions using a predefined color map
-- Saves the colored masks for visualization purposes
+- Saves the colored masks for training ControlNet
 
 ### 5. Generate Text Prompts
 
