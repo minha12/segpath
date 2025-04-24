@@ -1,0 +1,34 @@
+# Label mapping for reducing to 5 classes
+# format: original_label: new_label
+
+# Class 0: Background/Outside ROI
+0: 0   # outside_roi -> background
+7: 0   # exclude -> background
+15: 0  # undetermined -> background
+21: 0  # other -> background
+
+# Class 1: Tumor/Cancer
+1: 1   # tumor -> tumor
+20: 1  # dcis -> tumor
+19: 1  # angioinvasion -> tumor
+
+# Class 2: Stroma/Support
+2: 2   # stroma -> stroma
+9: 2   # fat -> stroma
+17: 2  # skin_adnexa -> stroma
+16: 2  # nerve -> stroma
+13: 2  # normal_acinus_or_duct -> stroma
+
+# Class 3: Inflammatory
+3: 3   # lymphocytic_infiltrate -> inflammatory
+10: 3  # plasma_cells -> inflammatory
+11: 3  # other_immune_infiltrate -> inflammatory
+
+# Class 4: Other Tissue Components
+4: 4   # necrosis_or_debris -> other_tissue
+5: 4   # glandular_secretions -> other_tissue
+6: 4   # blood -> other_tissue
+8: 4   # metaplasia_NOS -> other_tissue
+12: 4  # mucoid_material -> other_tissue
+14: 4  # lymphatics -> other_tissue
+18: 4  # blood_vessel -> other_tissue
