@@ -1,0 +1,83 @@
+# Base directories
+base_dirs:
+  data: "./data/5-classes"  # Changed to class-specific folder
+  meta: "./meta"
+  results: "./results/5-classes"  # Updated results directory
+  temp: "/tmp"
+
+# Data synchronization settings
+data_sync:
+  source_path: "/mnt/dsdd/datasets/bcss/bcss-kaggle/BCSS_512/"
+  destination_path: "${base_dirs.data}/"
+
+dataset:
+  # Source directories
+  source_dirs:
+    train_images: ${base_dirs.data}/train_512/
+    train_masks: ${base_dirs.data}/train_mask_512/
+    val_images: ${base_dirs.data}/val_512/
+    val_masks: ${base_dirs.data}/val_mask_512/
+  
+  # Output directories
+  output_dirs:
+    train_source: ${base_dirs.data}/train/source-original/
+    train_target: ${base_dirs.data}/train/target-original/
+    val_source: ${base_dirs.data}/val/source-original/
+    val_target: ${base_dirs.data}/val/target-original/
+  
+  # Split configuration
+  split:
+    train_percentage: 90
+    # val_percentage will be calculated as (100 - train_percentage)
+
+# Temporary file paths
+temp_files:
+  all_shuffled: ${base_dirs.temp}/all_shuffled_images.txt
+  train_list: ${base_dirs.temp}/train_images.txt
+  val_list: ${base_dirs.temp}/val_images.txt
+
+# Cleanup configuration
+cleanup:
+  remove_old_dirs: true
+
+paths:
+  labels_tsv: "${base_dirs.meta}/gtruth_codes_512.tsv"
+  
+  # Train paths
+  train_mask_dir: "${base_dirs.data}/train/source-original"
+  train_target_dir: "${base_dirs.data}/train/target-original"
+  train_plain_mask_dir: "${base_dirs.data}/train/source-plain"  # Add this line
+  train_colored_mask_dir: "${base_dirs.data}/train/source"
+  train_prompt_output_path: "${base_dirs.data}/train/prompt.json"
+  
+  # Validation paths
+  val_mask_dir: "${base_dirs.data}/val/source-original"
+  val_target_dir: "${base_dirs.data}/val/target-original"
+  val_plain_mask_dir: "${base_dirs.data}/val/source-plain"  # Add this line
+  val_colored_mask_dir: "${base_dirs.data}/val/source"
+  val_prompt_output_path: "${base_dirs.data}/val/prompt.json"
+  
+  results_dir: "${base_dirs.results}"
+  # For backwards compatibility
+  mask_dir: "${base_dirs.data}/train/source-original"
+  plain_mask_dir: "${base_dirs.data}/train/source-plain"  # Add this line
+  colored_mask_dir: "${base_dirs.data}/train/source"
+  target_dir: "${base_dirs.data}/train/target-original"
+  prompt_output_path: "${base_dirs.data}/train/prompt.json"
+
+files:
+  output_file: "pixel_class_percentages.csv"
+  # Class mapper - simplified for 5-classes only
+  mapper: "${base_dirs.meta}/mapper_5.yaml"
+
+settings:
+  mask_file_extension: "png"
+  num_classes: 5
+  # Color map for 5 classes
+  colors: ["#FFFFFF", "#FFA500", "#00FFFF", "#FF0000", "#008000"]
+  # Multiprocessing settings
+  thread_multiplier: 2
+  # Prompt generation settings
+  empty_mask_threshold: 0.98
+  min_class_percentage: 1.0
+  prompt_template: "pathology image: {class_descriptions}"
