@@ -1,0 +1,23 @@
+Label ID,Class Name,Pixel Count,Percentage
+1,tumor,656046705,31.7149
+2,stroma,590821559,28.5617
+0,outside_roi,412875596,19.9594
+3,lymphocytic_infiltrate,176240663,8.5199
+4,necrosis_or_debris,107791233,5.2109
+7,exclude,44662596,2.1591
+10,plasma_cells,29728168,1.4371
+9,fat,26585822,1.2852
+18,blood_vessel,8942682,0.4323
+6,blood,4067955,0.1967
+11,other_immune_infiltrate,3629646,0.1755
+13,normal_acinus_or_duct,1414590,0.0684
+8,metaplasia_NOS,1306981,0.0632
+15,undetermined,1254207,0.0606
+20,dcis,906750,0.0438
+17,skin_adnexa,864591,0.0418
+5,glandular_secretions,723270,0.0350
+19,angioinvasion,439734,0.0213
+14,lymphatics,191743,0.0093
+12,mucoid_material,61303,0.0030
+16,nerve,22510,0.0011
+21,other,0,0.0000
