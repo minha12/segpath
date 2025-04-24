@@ -118,16 +118,27 @@ This script:
 
 After preparation, you can analyze the dataset using the notebook:
 
-```bash
-cd notebooks
-jupyter notebook main.py
-```
+### Important Note: VS Code Required
 
-Or run it using:
+The main.py file in the notebooks directory is a Jupyter notebook that requires Visual Studio Code (VS Code) to run properly. You should open it using VS Code with the Jupyter extension installed.
+
+To open and run the notebook in VS Code:
+
+1. Make sure you have the Jupyter extension installed in VS Code
+2. Open VS Code and navigate to the notebooks directory
+3. Open main.py file
+4. VS Code will recognize it as a Jupyter notebook and provide the notebook interface
+
+If you don't have VS Code installed, you can install it from: https://code.visualstudio.com/
+
+You can also install the required Jupyter extension directly in VS Code by searching for "Jupyter" in the Extensions marketplace.
 
 ```bash
+# Navigate to notebooks directory
 cd notebooks
-python main.py
+
+# Open the notebook in VS Code
+code main.py
 ```
 
 The analysis generates visualizations showing the distribution of pixel classes:
