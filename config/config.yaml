@@ -52,16 +52,10 @@ paths:
   labels_detailed_tsv: "${base_dirs.meta}/class_codes_detailed.tsv"
   
   # Train paths
-  train_mask_dir: "${base_dirs.data}/train/source-original"
-  train_target_dir: "${base_dirs.data}/train/target-original"
-  train_plain_mask_dir: "${base_dirs.data}/train/source-original"  # Changed to use original folder
   train_colored_mask_dir: "${base_dirs.data}/train/source"
   train_prompt_output_path: "${base_dirs.data}/train/prompt.json"
   
   # Validation paths
-  val_mask_dir: "${base_dirs.data}/val/source-original"
-  val_target_dir: "${base_dirs.data}/val/target-original"
-  val_plain_mask_dir: "${base_dirs.data}/val/source-original"  # Changed to use original folder
   val_colored_mask_dir: "${base_dirs.data}/val/source"
   val_prompt_output_path: "${base_dirs.data}/val/prompt.json"
   
@@ -69,8 +63,6 @@ paths:
 
 files:
   output_file: "pixel_class_percentages.csv"
-  # Class mapper - simplified for 5-classes only
-  mapper: "${base_dirs.meta}/mapper_5.yaml"
 
 settings:
   mask_file_extension: "png"
