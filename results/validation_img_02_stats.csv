@@ -1,0 +1,10 @@
+Class ID,Class Name,Pixel Count,Percentage
+8,panCK_Epithelium,580841,59.9884
+0,outside_roi,360113,37.1919
+5,aSMA_SmoothMuscle,19452,2.0090
+6,CD45RB_Leukocyte,5971,0.6167
+3,MNDA_MyeloidCell,1252,0.1293
+4,CD3CD20_Lymphocyte,523,0.0540
+7,MIST1_PlasmaCell,104,0.0107
+1,CD235a_RBC,0,0.0000
+2,ERG_Endothelium,0,0.0000
