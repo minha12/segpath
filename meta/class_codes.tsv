@@ -1,0 +1,10 @@
+label	GT_code
+outside_roi	0
+CD235a_RBC	1
+ERG_Endothelium	2
+MNDA_MyeloidCell	3
+CD3CD20_Lymphocyte	4
+aSMA_SmoothMuscle	5
+CD45RB_Leukocyte	6
+MIST1_PlasmaCell	7
+panCK_Epithelium	8
