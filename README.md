@@ -65,20 +65,7 @@ This script:
 - Counts pixels belonging to each class
 - Generates a CSV file with class distributions in the results directory
 
-### 3. Reduce Mask Classes (if applicable)
-
-If your workflow requires class reduction:
-
-```bash
-python scripts/3_reduce_mask_classes.py
-```
-
-This script:
-- Uses a class mapping defined in the configuration
-- Converts the original multi-class masks to a simplified format
-- Saves the simplified masks to the output directory
-
-### 4. Create Colored Masks
+### 3. Create Colored Masks
 
 Generate colored visualizations of the masks for easier inspection:
 
@@ -91,7 +78,7 @@ This script:
 - Creates colored versions using a predefined color map
 - Saves the colored masks for visualization or training
 
-### 5. Generate Text Prompts
+### 4. Generate Text Prompts
 
 Create text descriptions from the mask images:
 
