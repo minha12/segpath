@@ -8,7 +8,7 @@ import numpy as np
 from pathlib import Path
 
 # Sample a few masks
-mask_dir = Path("data/5-classes/train/source")
+mask_dir = Path("data/train/source-original")
 sample_masks = list(mask_dir.glob("*.png"))[:5]  # Check first 5 masks
 
 for mask_path in sample_masks:
@@ -24,7 +24,7 @@ import random
 
 # Path to the source (mask) and target images
 mask_path = "./data/train/source"
-image_path = "./data/train/target"
+image_path = "./data/train/target-original"
 
 # Load a mask from the source directory
 mask_files = os.listdir(mask_path)
@@ -88,7 +88,7 @@ subprocess.run(["python", "./scripts/count_pixel_classes.py"])
 # Display the CSV data in a more readable format
 import pandas as pd
 from IPython.display import display
-df = pd.read_csv("results/pixel_class_percentages.csv")
+df = pd.read_csv("results/train_pixel_class_percentages.csv")
 display(df)  # This will show as a nice table in Jupyter
 
 
@@ -97,7 +97,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the data
-df = pd.read_csv("results/pixel_class_percentages.csv")
+df = pd.read_csv("results/train_pixel_class_percentages.csv")
 
 # Sort by percentage (descending)
 df = df.sort_values('Percentage', ascending=False)
