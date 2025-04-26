@@ -8,21 +8,7 @@ import yaml
 import re
 from fire import Fire  # Add Fire for command-line arguments
 
-from utils import resolve_variables
-
-# Load configuration
-def load_config(config_path):
-    with open(config_path, 'r') as file:
-        return yaml.safe_load(file)
-
-# Extract class name from filename
-def extract_class_name(filename):
-    """Extract class name from filename like 'CD235a_RBC_033_026624_045056_mask.png'"""
-    parts = filename.split('_')
-    if len(parts) >= 2:
-        # First two components should be the class name (e.g., 'CD235a_RBC')
-        return f"{parts[0]}_{parts[1]}"
-    return None
+from utils import resolve_variables, load_config, extract_class_name
 
 # Read the labels from the TSV file
 def read_labels_from_tsv(tsv_path):

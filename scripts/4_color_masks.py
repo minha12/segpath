@@ -8,24 +8,7 @@ import yaml
 import csv
 from fire import Fire
 
-from utils import resolve_variables  # Import the resolve_variables function
-
-def load_config(config_path):
-    """Load configuration from YAML file"""
-    with open(config_path, 'r') as file:
-        return yaml.safe_load(file)
-
-def load_class_codes(tsv_path):
-    """Load class codes from TSV file"""
-    class_codes = {}
-    with open(tsv_path, 'r') as f:
-        reader = csv.reader(f, delimiter='\t')
-        next(reader)  # Skip header
-        for row in reader:
-            if len(row) >= 2:
-                label, code = row[0], int(row[1])
-                class_codes[label] = code
-    return class_codes
+from utils import resolve_variables, load_config, load_class_codes
 
 def extract_class_name(filename):
     """Extract class name from filename."""

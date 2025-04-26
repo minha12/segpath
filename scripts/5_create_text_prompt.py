@@ -10,12 +10,7 @@ import yaml
 from fire import Fire  # Import Fire
 
 from prompt_augmenter import augment_prompt
-from utils import resolve_variables  # Import the resolve_variables function
-
-def load_config(config_path):
-    """Load configuration from YAML file"""
-    with open(config_path, 'r') as file:
-        return yaml.safe_load(file)
+from utils import resolve_variables, load_config, clean_class_name, create_prompt, extract_class_name, load_class_codes
 
 def load_labels_from_tsv(tsv_path):
     """Load labels from TSV file."""
@@ -25,23 +20,6 @@ def load_labels_from_tsv(tsv_path):
         for row in reader:
             labels[int(row['GT_code'])] = row['label']
     return labels
-
-def clean_class_name(class_name):
-    """Clean up class names by removing special characters and converting to lowercase."""
-    # Replace underscores and commas with spaces
-    cleaned = class_name.replace('_', ' ').replace(',', ' ')
-    # Convert to lowercase
-    cleaned = cleaned.lower()
-    # Remove multiple spaces
-    cleaned = ' '.join(cleaned.split())
-    return cleaned
-
-def create_prompt(class_percentages, prompt_template):
-    """Create prompt string with full class names."""
-    class_descriptions = ", ".join([f"{class_name} {percentage:.2f}%" 
-                                  for class_name, percentage in class_percentages])
-    prompt = prompt_template.format(class_descriptions=class_descriptions)
-    return prompt
 
 def process_mask(mask_path, label_to_name, class_codes, config, filter_background=False):
     """Process a binary mask image to create a text prompt."""
@@ -96,26 +74,6 @@ def process_mask(mask_path, label_to_name, class_codes, config, filter_backgroun
         prompt = prompt_template.format(class_descriptions="background")
         
     return prompt
-
-def extract_class_name(filename):
-    """Extract class name from filename like 'CD235a_RBC_033_026624_045056_mask.png'"""
-    parts = filename.split('_')
-    if len(parts) >= 2:
-        # First two components should be the class name (e.g., 'CD235a_RBC')
-        return f"{parts[0]}_{parts[1]}"
-    return None
-
-def load_class_codes(tsv_path):
-    """Load class codes from TSV file"""
-    class_codes = {}
-    with open(tsv_path, 'r') as f:
-        reader = csv.reader(f, delimiter='\t')
-        next(reader)  # Skip header
-        for row in reader:
-            if len(row) >= 2:
-                label, code = row[0], int(row[1])
-                class_codes[label] = code
-    return class_codes
 
 def main(
     use_augmentation=False, 
