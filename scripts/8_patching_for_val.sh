@@ -8,9 +8,11 @@ set -e  # Exit on any error
 # Define base directory and paths
 BASE_DIR="data/val"
 ORIGINAL_TARGET_DIR="${BASE_DIR}/target-original"
-NEW_TARGET_DIR="${BASE_DIR}/target"
+NEW_TARGET_DIR="${BASE_DIR}/images"
 SOURCE_PLAIN_DIR="${BASE_DIR}/source-plain"
 NEW_SOURCE_PLAIN_DIR="${BASE_DIR}/plain-segmentation"
+SOURCE_DIR="${BASE_DIR}/source"
+NEW_SOURCE_DIR="${BASE_DIR}/segmentation"
 PROMPT_FILE="${BASE_DIR}/prompt.json"
 BACKUP_PROMPT_FILE="${BASE_DIR}/prompt.json.backup"
 
@@ -106,8 +108,21 @@ perform_restructuring() {
         return 1
     fi
     
-    # Step 3: Update prompt.json
-    print_status "Step 3: Updating prompt.json file..."
+    # Step 3: Rename source to segmentation
+    print_status "Step 3: Renaming source to segmentation..."
+    if check_directory "${SOURCE_DIR}"; then
+        if [ -d "${NEW_SOURCE_DIR}" ]; then
+            print_warning "Target directory ${NEW_SOURCE_DIR} already exists. Removing it first..."
+            rm -rf "${NEW_SOURCE_DIR}"
+        fi
+        mv "${SOURCE_DIR}" "${NEW_SOURCE_DIR}"
+        print_success "Renamed ${SOURCE_DIR} to ${NEW_SOURCE_DIR}"
+    else
+        return 1
+    fi
+    
+    # Step 4: Update prompt.json
+    print_status "Step 4: Updating prompt.json file..."
     if check_file "${PROMPT_FILE}"; then
         # Create backup
         cp "${PROMPT_FILE}" "${BACKUP_PROMPT_FILE}"
@@ -154,11 +169,29 @@ validate_results() {
         return 1
     fi
     
+    # Check if segmentation directory exists and has files
+    if [ -d "${NEW_SOURCE_DIR}" ]; then
+        file_count=$(ls "${NEW_SOURCE_DIR}/" | wc -l)
+        print_success "Segmentation directory exists with ${file_count} files"
+        echo "Sample files in segmentation:"
+        ls "${NEW_SOURCE_DIR}/" | head -3
+    else
+        print_error "Segmentation directory does not exist!"
+        return 1
+    fi
+    
     # Check if old source-plain directory no longer exists
     if [ ! -d "${SOURCE_PLAIN_DIR}" ]; then
         print_success "Old source-plain directory successfully removed"
     else
         print_warning "Old source-plain directory still exists"
+    fi
+    
+    # Check if old source directory no longer exists
+    if [ ! -d "${SOURCE_DIR}" ]; then
+        print_success "Old source directory successfully removed"
+    else
+        print_warning "Old source directory still exists"
     fi
     
     # Validate prompt.json updates
